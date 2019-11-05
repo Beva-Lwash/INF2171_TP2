@@ -201,7 +201,7 @@ public class batnav {
 public class batnav {
     
     /***********************************************************/
-    public static String recupererEntreeClavier() {
+    public static String recupererEntreeClavierBateau() {
     
         String DEMANDE_D_ENTREE = "Entrer la description et la position des bateaux \r\n"
                         + "selon le format suivant, separes par des espaces: \r\n"
@@ -220,6 +220,28 @@ public class batnav {
     }
     
     /***********************************************************/
+    public static String recupererEntreeClavierCoups(){
+    	
+    	String DEMANDE_COUP="Feu à volonté!  \n" + 
+    			"(entrer les coups à tirer: colonne [A-R] rangée [1-9]) \n" + 
+    			"ex: A3 I5 M3 ";
+    	
+        Pep8.charo('\n');
+
+        Pep8.stro(DEMANDE_COUP);
+        char entreeUsercarc;
+        String entreeCoups = "";
+        do {
+            entreeUsercarc = Pep8.chari();
+            entreeCoups = entreeCoups + entreeUsercarc;
+        } while (entreeUsercarc != '\n');
+    	
+    
+    	return entreeCoups;
+    }
+    
+    
+    /*********************************************************/
     public static void validationBateau(String unBateau) {
     
         char grandeurentree = unBateau.charAt(0);
@@ -239,9 +261,22 @@ public class batnav {
     }
 
     /***********************************************************/
+    public static char[] validationCoup(String unCoup) {
+    	char[] coup= {' ', ' '};
+    	char colonne=unCoup.charAt(0);
+    	char rangee=unCoup.charAt(1);
+    	
+    	if(colonne>='A' && colonne<='R' && rangee>='1' && rangee<='9') {
+    		coup[0]=colonne;
+    		coup[1]=rangee;
+    	}
+    	return coup;
+    }
+    
+    /**********************************************************/
     public static String[] verificationBateaux() {
 
-        String entreeBateau = recupererEntreeClavier();
+        String entreeBateau = recupererEntreeClavierBateau();
         final String ESPACE = " ";
         String bateaux[] = entreeBateau.split(ESPACE);
         
@@ -256,11 +291,37 @@ public class batnav {
     }
     
     /***********************************************************/ 
+    public static String[] verificationCoup() {
+    	String entreeCoups= recupererEntreeClavierCoups();
+    	final String ESPACE=" ";
+    	String coups[]=entreeCoups.split(ESPACE);
+    	
+        for (int i = 0; i < coups.length; i++) {
+            if (coups[i].length() == 2 || coups[i].length() == 3){
+                validationCoup(coups[i]);
+            }else {
+            	erreurEntreeCoup();
+            }
+        }
+    	
+    	
+    	return coups;
+    }
+    
+    
+    
+    /********************************************************/
+    
     public static void erreurEntree() {
-        System.err.println("Le format de l'entrÃ©e ne respecte pas les paramÃ¨tres indiquÃ©s!");
+        System.err.println("Le format de l'entree ne respecte pas les parametres indiques!");
         verificationBateaux();
     }
-
+    /***********************************************************/
+    public static void erreurEntreeCoup() {
+        System.err.println("Le format de l'entree ne respecte pas les parametres indiques!");
+        verificationCoup();
+    }
+    
     /***********************************************************/
     public static void placementBateau(char[][] tableau, String[] bateau) {
         
@@ -400,6 +461,23 @@ public class batnav {
                     Pep8.charo('|');
                     Pep8.charo('\n');
             }
+            
+            String[] coups=verificationCoup();
+            for(int i =0;i<coups.length;i++) {
+            	char[] coupActuel= {coups[i].charAt(0),coups[i].charAt(1)};
+            	coupTire(matrice,coupActuel);
+            }
+            
+            for (int x = 0; x <= 8; x++) {
+                Pep8.deco(x + 1);
+                Pep8.charo('|');
+                for (int y = 0; y <= 17; y++) {
+                        Pep8.charo(matrice[x][y]);
+                }
+                Pep8.charo('|');
+                Pep8.charo('\n');
+        }
+            
 
         //}
         
