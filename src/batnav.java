@@ -313,14 +313,34 @@ public class batnav {
     /*******************************************************************************************************/
     
     public static void coupTire(char[][] tableau,char[] coupTire) {
-    	int cH=coupTire[0]-1;
-    	char[] coupTireHaut= {cH,coupTire[1]};
+    	
     	if((coupTire.length== 2)&&(coupTire[0]<='A' && coupTire[0]>='R' )&& (coupTire[1]<='1' && coupTire[1]>='9') ) {
     		if(tableau[coupTire[1]-50-1][coupTire[0]-64-1]=='v' || tableau[coupTire[1]-50-1][coupTire[0]-64-1]=='>') {
     			tableau[coupTire[1]-50-1][coupTire[0]-64-1]='*';
+    	    	char cH=(char)  (coupTire[1]-1);
+    	    	char cG= (char) (coupTire[0]-1);
+    	    	char cB= (char) (coupTire[1]+1);
+    	    	char cD= (char) (coupTire[0]+1);
+    	    	char[] coupTireHaut= {coupTire[0],cH};
+    	    	char[] coupTireBas= {coupTire[0],cB};
+    	    	char[] coupTireGauche= {cG,coupTire[1]};
+    	    	char[] coupTireDroit= {cD,coupTire[1]};
+    	    	if(cH>='1') {
+    	    		coupTire(tableau,coupTireHaut);
+    	    	}
+    	    	if(cB<='9') {
+    	    		coupTire(tableau,coupTireBas);
+    	    	}
+    	    	if(cG<='A') {
+    	    		coupTire(tableau,coupTireGauche);
+    	    	}
+    	    	if(cD>='R') {
+    	    		coupTire(tableau,coupTireDroit);
+    	    	}
+    			
     		}else if(tableau[coupTire[1]-50-1][coupTire[0]-64-1]=='~') {
     			tableau[coupTire[1]-50-1][coupTire[0]-64-1]='o';
-    			char coupTireH=coupTire(tableau,coupTireHaut);
+    		
     		}
     	}
     }
