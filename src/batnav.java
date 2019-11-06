@@ -227,13 +227,14 @@ public class batnav {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // Affichage du message de bienvenue 
         String Bienvenue = "Bienvenue dans ce jeu de bataille navale!\n";
         Pep8.stro(Bienvenue);
 
+        //Chaîne de caractères pour l'affichage des colonnes
         String Colonnes = "  ABCDEFGHIJKLMNOPQR";
         
-        // TODO creer tableau
+        // Création de la planche de jeu
         char[][] matrice = new char[9][18];
 
         for (int i = 0; i <= 8; i++) {
@@ -241,10 +242,10 @@ public class batnav {
                     matrice[i][j] = '~';
             }
         }
-
+        
+        //Affichage de la planche de jeu
         Pep8.stro(Colonnes);
         Pep8.charo('\n');
-        
         for (int i = 0; i <= 8; i++) {
             Pep8.deco(i + 1);
             Pep8.charo('|');
@@ -255,23 +256,13 @@ public class batnav {
             Pep8.charo('\n');
         }
         
-        // TODO ajouts des bateaux
-        
-        System.out.println("Je suis dans le main!!!!");
-      
-        String[] bateaux = verificationBateaux();
-        System.out.println("dans le main (bateaux.length)=" + bateaux.length);
-       
-        //for (int i = 0; i < bateaux.length; i++) {
-            //Pep8.stro(bateaux[0]);
-            //String test = bateaux[0];
-            // placer les bateaux
-          
+        	//Vérification et placements des bateaux sur la planche de jeu
+            String[] bateaux = verificationBateaux();          
             placementBateau(matrice,bateaux);
 
+            //Affichage de la planche de jeu 
             Pep8.stro(Colonnes);
             Pep8.charo('\n');
-
             for (int x = 0; x <= 8; x++) {
                     Pep8.deco(x + 1);
                     Pep8.charo('|');
@@ -281,18 +272,20 @@ public class batnav {
                     Pep8.charo('|');
                     Pep8.charo('\n');
             }
-            //*******
-    int tableaunonvide = 0;
-        do {
+            
+            //Boucle pour les différents coups
+            int tableaunonvide = 0;
+            do {
+            //Verification de l'entrée des différents coups
             String[] coups = verificationCoup();
             for (int i = 0; i < coups.length; i++) {
+            	//Coup actuel et jeu du coup 
                 char[] coupActuel = { coups[i].charAt(0), coups[i].charAt(1) };
                 coupTire(matrice, coupActuel);
                 
-                /*****/
+                //Affichage planche de jeu avec le coup actuel
                 Pep8.stro(Colonnes);
                 Pep8.charo('\n');
-                /****/
                 for (int x = 0; x <= 8; x++) {
                     Pep8.deco(x + 1);
                     Pep8.charo('|');
@@ -306,7 +299,7 @@ public class batnav {
                 }
                 Pep8.charo('\n');
             }
-            
+            	//Vérification de de la planche de jeu qu'elle soit vidé
                 for (int x = 0; x <= 8; x++) {
                 for (int y = 0; y <= 17; y++) {
                     if (matrice[x][y] == 'v' || matrice[x][y] == '>') {
@@ -319,8 +312,9 @@ public class batnav {
         } while (tableaunonvide == 0);
 
 		
-	Pep8.stro("Vous avez anÃ©anti la flotte!!!!");
+        Pep8.stro("Vous avez anÃ©anti la flotte!!!!");
         
+        //Arrêt du jeu
         Pep8.stop();
 
     }	    
