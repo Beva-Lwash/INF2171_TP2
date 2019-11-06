@@ -262,6 +262,8 @@ public class batnav {
 				char[] coupActuel = { coups[i].charAt(0), coups[i].charAt(1) };
 				coupTire(matrice, coupActuel);
 				
+				Pep8.stro(Colonnes);
+				Pep8.charo('\n');
 				for (int x = 0; x <= 8; x++) {
 					Pep8.deco(x + 1);
 					Pep8.charo('|');
@@ -270,6 +272,7 @@ public class batnav {
 
 					}
 					Pep8.charo('|');
+					Pep8.charo('\n');
 					Pep8.charo('\n');
 				}
 				
