@@ -194,6 +194,7 @@ public class batnav {
 			if (tableau[coupTire[1] - 48 - 1][coupTire[0] - 64 - 1] == 'v'
 					|| tableau[coupTire[1] - 48 - 1][coupTire[0] - 64 - 1] == '>') {
 				tableau[coupTire[1] - 48 - 1][coupTire[0] - 64 - 1] = '*';
+				/*
 				char cH = (char) (coupTire[1] - 1);
 				char cG = (char) (coupTire[0] - 1);
 				char cB = (char) (coupTire[1] + 1);
@@ -214,7 +215,7 @@ public class batnav {
 				if (cD >= 'R') {
 					coupTire(tableau, coupTireDroit);
 				}
-
+*/
 			} else if (tableau[coupTire[1] - 50 - 1][coupTire[0] - 64 - 1] == '~') {
 				tableau[coupTire[1] - 50 - 1][coupTire[0] - 64 - 1] = 'o';
 
